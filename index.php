@@ -4,6 +4,7 @@
 <style>
 img { padding: 8px; }
 h1 { text-align: center; }
+
 .modal {
   display: none;
   position: fixed;
@@ -23,7 +24,7 @@ h1 { text-align: center; }
   flex-direction: column;
   justify-content: center;
   margin: auto;
-  padding: 0 0 0 0;
+  padding: 0 20 0 0;
   height: 100%;
   max-width: 1200px;
 }
@@ -40,14 +41,15 @@ h1 { text-align: center; }
 
 </style>
 <script>
-function openLightbox(img) {
+function openLightbox(imgPath) {
     document.getElementById("spinner").style.display = "block";
     document.getElementById("lightboxContainer").style.display = "block";
     document.getElementById("lightboxContainer").style.opacity = "50%";
-    lightboxImg.src = atob(img);
+    document.getElementById("lightboxImg").src = imgPath;
     lightboxImg.onload = function() {
         document.getElementById("spinner").style.display = "none";
         document.getElementById("lightboxContainer").style.opacity = "100%";
+        document.getElementById("lightboxImg").style.display = "block";
         document.getElementById("lightboxImg").style.display = "flex";
     };
 }
@@ -102,7 +104,7 @@ foreach ($data as $item) {
         $file_path = $baseDir . $item['name'];
         switch ($handler) {
             case "image.php":
-                echo "<img src='image.php?" . base64url_encode($file_path) . "' height='200' onclick='openLightbox(\"" . base64url_encode($file_path) . "\");'>\r\n";  
+                echo "<img src='image.php?" . base64url_encode($file_path) . "' height='200' onclick='openLightbox(\"image.php?" . base64url_encode($file_path) . "\");'>\r\n";  
                 break;
             default:
         }
